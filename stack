@@ -1,0 +1,49 @@
+class Pal
+  def initialize
+    @count=1
+    @arr=Array.new
+  end
+  
+  def masuk kata
+    @arr[@count]=kata
+    @count+=1
+  end
+  
+  def keluar
+    @count-=1
+    hasil=@arr[@count]
+    return hasil
+  end
+  
+  def cetak
+    for i in 0..@arr.length
+      print @arr[i]
+    end
+  end
+end
+
+pal=Pal.new()
+arr1=Array.new()
+arr2=Array.new()
+print "masukkan kata: "
+kata=gets
+arr1=kata.scan(/./)
+bts=kata.length-1
+puts "--------------------"
+puts "PUSH!"
+puts "--------------------"
+for i in 0...bts
+  pal.masuk arr1[i]
+end
+puts "--------------------"
+puts "POP!"
+puts "--------------------"
+jml=0
+for i in 0...bts
+  if arr1[i]==pal.keluar
+    jml+=1
+  end
+end
+
+puts "PALINDROME" if jml==bts
+puts "BUKAN PALINDROME" if jml!=bts
