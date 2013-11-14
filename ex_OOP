@@ -1,0 +1,18 @@
+class Volume
+  attr_accessor :p, :l, :t
+  def proses
+    @v=@p*@l*@t
+    output
+  end
+  def output
+    puts "Volume= " + @v.to_s
+  end
+end
+obj=Volume.new()
+print "Masukkan panjang :"
+obj.p=gets.to_i
+print "Masukkan lebar   :"
+obj.l=gets.to_i
+print "Masukkan panjang :"
+obj.t=gets.to_i
+obj.proses
