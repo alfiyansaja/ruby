@@ -1,0 +1,129 @@
+class LinkListed
+  def initialize
+    @head=nil
+    @tail=nil
+    
+    @size=0
+  end
+  
+  class Node
+    attr_reader :item
+    attr_accessor :next, :prev
+    
+    def initialize item
+      @item=item
+      
+      @next=nil
+      @prev=nil
+    end
+  end
+  
+  def tambah item
+    node=Node.new(item)
+    if @size <=0
+      @head=node
+      @tail=node
+    else
+      @tail.next=node
+      node.prev=@tail
+      @tail=node
+    end
+    @size+=1
+  end
+  
+  def tambahAfter item, baru
+    node=@head
+    if @size==0
+      puts "LIST KOSONG!"
+    else
+      while node!=nil
+        puts node.item
+        if node.item==item
+          nodeTemp=node.next
+          nodeNew=Node.new baru
+          node.next=nodeNew
+          nodeNew.prev=node
+          nodeNew.next=nodeTemp
+          nodeTemp.prev=nodeNew
+          break
+        end
+        node=node.next
+      end
+    end
+    puts "--------------------------"
+  end
+  
+  def tambahBefore item, baru
+    node=@head
+    if @size==0
+      puts "LIST KOSONG!"
+    else
+      while node!=nil
+        if node.item==item
+          nodeTemp=node.prev
+          nodeNew=Node.new baru
+          node.prev=nodeNew
+          nodeNew.next=node
+          nodeNew.prev=nodeTemp
+          nodeTemp.next=nodeNew
+          break
+        end
+        node=node.next
+      end
+    end
+    puts "--------------------------"
+  end
+  
+  def tampil
+    node=@head
+    if @size==0
+      puts "LIST KOSONG!"
+    else
+      while node!=nil
+        puts node.item
+        node=node.next
+      end
+    end
+    puts "--------------------------"
+  end
+end
+
+menu=0
+link=LinkListed.new
+until menu==5 do
+  puts "1. Tambah"
+  puts "2. insert setelah.."
+  puts "3. insert sebelum.."
+  puts "4. Tampil"
+  puts "5. Exit"
+  print "Masukkan menu: "
+  menu=gets.to_i
+  puts "--------------------------"
+  if menu==1
+    print "masukkan item: "
+    item=gets.chomp
+    link.tambah item
+    puts "--------------------------"
+  elsif menu==2
+    print "masukkan item setelah apa?"
+    after=gets.chomp
+    print "masukkan data baru: "
+    baru=gets.chomp
+    link.tambahAfter after, baru
+  elsif menu==3
+    print "masukkan item sebelum apa?"
+    before=gets.chomp
+    print "masukkan data baru: "
+    baru=gets.chomp
+    link.tambahBefore before, baru
+  elsif menu==4
+    puts "List data sebagai berikut:"
+    puts "--------------------------"
+    link.tampil
+  elsif menu==5
+    exit
+  else
+    puts "menune salah mas!"
+    puts "--------------------------"
+  end
+end
